@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/wannes/CLionProjects/PDA/PDA.h
+string
+-
+vector
+-
+
+/home/wannes/CLionProjects/PDA/main.cpp
+iostream
+-
+PDA.h
+/home/wannes/CLionProjects/PDA/PDA.h
+

@@ -123,6 +123,33 @@ PDA/fast:
 	$(MAKE) -f CMakeFiles/PDA.dir/build.make CMakeFiles/PDA.dir/build
 .PHONY : PDA/fast
 
+PDA.o: PDA.cpp.o
+
+.PHONY : PDA.o
+
+# target to build an object file
+PDA.cpp.o:
+	$(MAKE) -f CMakeFiles/PDA.dir/build.make CMakeFiles/PDA.dir/PDA.cpp.o
+.PHONY : PDA.cpp.o
+
+PDA.i: PDA.cpp.i
+
+.PHONY : PDA.i
+
+# target to preprocess a source file
+PDA.cpp.i:
+	$(MAKE) -f CMakeFiles/PDA.dir/build.make CMakeFiles/PDA.dir/PDA.cpp.i
+.PHONY : PDA.cpp.i
+
+PDA.s: PDA.cpp.s
+
+.PHONY : PDA.s
+
+# target to generate assembly for a file
+PDA.cpp.s:
+	$(MAKE) -f CMakeFiles/PDA.dir/build.make CMakeFiles/PDA.dir/PDA.cpp.s
+.PHONY : PDA.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... PDA"
 	@echo "... edit_cache"
+	@echo "... PDA.o"
+	@echo "... PDA.i"
+	@echo "... PDA.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

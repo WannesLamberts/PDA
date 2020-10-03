@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/PDA.dir/PDA.cpp.o"
   "CMakeFiles/PDA.dir/main.cpp.o"
   "PDA"
   "PDA.pdb"

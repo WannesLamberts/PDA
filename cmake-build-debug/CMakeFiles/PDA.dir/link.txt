@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/PDA.dir/main.cpp.o  -o PDA 
+/usr/bin/c++  -g   CMakeFiles/PDA.dir/main.cpp.o CMakeFiles/PDA.dir/PDA.cpp.o  -o PDA 
