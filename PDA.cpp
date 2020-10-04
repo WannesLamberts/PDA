@@ -3,14 +3,14 @@
 //
 
 #include "PDA.h"
-
-
+#include <stack>
+#include<tuple>
 PDA::PDA(const std::vector<std::string> &inputAlphabet,
          const std::vector<std::string> &stackAlphabet,
          const std::string &startStackSymbol)
     : inputAlphabet(inputAlphabet), stackAlphabet(stackAlphabet),
       startStackSymbol(startStackSymbol) {}
-bool PDA::addTransition(std::string from, std::string input, std::string to,std::vector<std::string> pop,std::vector<std::string> push) {
+bool PDA::addTransition(std::string from, std::string input, std::string to,std::string pop,std::vector<std::string> push) {
   Transition t(input,findState(to),pop,push);
   findState(from)->transitions.push_back(t);
   return true;
@@ -30,6 +30,10 @@ bool PDA::addState(std::string name,bool isFinal,bool isStart) {
   return true;
 }
 bool PDA::runInput(std::vector<std::string> input) {
+  std::vector<std::tuple <State*, std::stack<std::string>>> currentstate;
+  std::stack<std::string> begin;
+  std::tuple <State*, std::stack<std::string>> start=make_tuple(startState, begin);
+  currentstate.push_back(start);
   return false;
 }
 
@@ -37,6 +41,6 @@ State::State(const std::string &name, bool isFinal)
     : name(name), isFinal(isFinal) {}
 
 Transition::Transition(const std::string &input, State *state,
-                       const std::vector<std::string> &pop,
+                       std::string pop,
                        const std::vector<std::string> &push)
     : input(input), state(state), pop(pop), push(push) {}

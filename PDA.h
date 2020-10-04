@@ -10,9 +10,9 @@ struct State;
 struct Transition{
   std::string input;
   State* state;
-  std::vector<std::string> pop;
+  std::string pop;
   Transition(const std::string &input, State *state,
-             const std::vector<std::string> &pop,
+            std::string pop,
              const std::vector<std::string> &push);
   std::vector<std::string> push;
 
@@ -35,9 +35,10 @@ public:
       const std::vector<std::string> &stackAlphabet,
       const std::string &startStackSymbol);
   bool addState(std::string name,bool isFinal,bool isStart);
-  bool addTransition(std::string from,std::string input,std::string to,std::vector<std::string> pop,std::vector<std::string> push);
+  bool addTransition(std::string from,std::string input,std::string to,std::string pop,std::vector<std::string> push);
   State* findState(std::string name);
   bool runInput(std::vector<std::string> input);
+
 };
 
 #endif // PDA_PDA_H
