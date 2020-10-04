@@ -21,13 +21,13 @@ struct State{
   std::string name;
   std::vector<Transition> transitions;
   bool isFinal;
-  State(const std::string &name, bool isFinal);
+  bool isStart;
+  State(const std::string &name, bool isFinal, bool isStart);
 };
 class PDA {
   std::vector<State> states;
   std::vector<std::string> inputAlphabet;
   std::vector<std::string> stackAlphabet;
-  State* startState;
   std::string startStackSymbol;
   std::vector<State*> finalStates;
 public:
