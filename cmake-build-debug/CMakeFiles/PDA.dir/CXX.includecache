@@ -6,15 +6,21 @@
 
 #IncludeRegexTransform: 
 
+/home/wannes/CLionProjects/PDA/PDA.cpp
+PDA.h
+/home/wannes/CLionProjects/PDA/PDA.h
+stack
+-
+tuple
+-
+iostream
+-
+fstream
+-
+
 /home/wannes/CLionProjects/PDA/PDA.h
 string
 -
 vector
 -
-
-/home/wannes/CLionProjects/PDA/main.cpp
-iostream
--
-PDA.h
-/home/wannes/CLionProjects/PDA/PDA.h
 

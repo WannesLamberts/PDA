@@ -6,6 +6,7 @@
 #include <stack>
 #include<tuple>
 #include <iostream>
+#include <fstream>
 PDA::PDA(const std::vector<std::string> &inputAlphabet,
          const std::vector<std::string> &stackAlphabet,
          const std::string &startStackSymbol)
@@ -95,6 +96,46 @@ bool PDA::runInput(std::vector<std::string> input) {
   }
   return false;
 }
+void PDA::toDot(std::string file) {
+  std::ofstream stream (file);
+  if(stream.is_open()) {
+    stream << "digraph DFA{\n";
+    stream << "graph [overlap=\"prism\"]\n";
+    stream << "rankdir = LR;\n";
+    stream << "node [shape = doublecircle];";
+    for (int i = 0; i < states.size(); ++i) {
+      if(states[i].isFinal){
+        stream << " \"" + states[i].name + "\"";
+      }
+    }
+    stream << "\nnode [shape = none]; \"\";\n";
+    stream << "\nnode [shape = circle];\n";
+    State *startState;
+    for (int i = 0; i < states.size(); ++i) {
+      if (states[i].isStart) {
+        startState = &states[i];
+      }
+    }
+    stream << "\"\" -> \"" + startState->name + "\" [ label = \"Start\" ]\n";
+    for (int j = 0; j < states.size(); ++j) {
+      for (int i = 0; i < states[j].transitions.size(); ++i) {
+        std::string push = "";
+        for (int k = 0; k < states[j].transitions[i].push.size(); ++k) {
+          push += states[j].transitions[i].push[k];
+        }
+        stream << "\""
+               << states[j].name + "\" -> \"" +
+                      states[j].transitions[i].state->name + "\" [ label = \"(" +
+                      states[j].transitions[i].input + ", " +
+                      states[j].transitions[i].pop + "/" + push + ")\" ];\n";
+      }
+    }
+    stream << "}";
+    stream.close();
+    std::string command = "dot " + file + " -Tpng -o " + file + ".png";
+     system(command.c_str());
+  }
+  }
 
 
 Transition::Transition(const std::string &input, State *state,

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 #include "PDA.h"
 int main() {
@@ -20,5 +21,6 @@ int main() {
   std::cout<<p.runInput(input0)<<std::endl;
   std::cout<<"run aab"<<std::endl;
   std::cout<<p.runInput(input1)<<std::endl;
+  p.toDot("pda.dot");
   return 0;
 }
