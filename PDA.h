@@ -38,7 +38,9 @@ public:
   bool addTransition(std::string from,std::string input,std::string to,std::string pop,std::vector<std::string> push);
   State* findState(std::string name);
   bool runInput(std::vector<std::string> input);
+  PDA();
   void toDot(std::string file);
+  void read(std::string file);
 };
 
 #endif // PDA_PDA_H

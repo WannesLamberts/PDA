@@ -7,6 +7,7 @@
 #include<tuple>
 #include <iostream>
 #include <fstream>
+#include "json-develop/single_include/nlohmann/json.hpp"
 PDA::PDA(const std::vector<std::string> &inputAlphabet,
          const std::vector<std::string> &stackAlphabet,
          const std::string &startStackSymbol)
@@ -59,7 +60,7 @@ bool PDA::runInput(std::vector<std::string> input) {
   }
   std::vector<std::tuple <State*, std::stack<std::string>>> currentstate;
   std::stack<std::string> begin;
-  begin.push("Z");
+  begin.push(startStackSymbol);
   std::tuple <State*, std::stack<std::string>> start=make_tuple(startState, begin);
   currentstate.push_back(start);
   eclose(currentstate);
@@ -136,7 +137,48 @@ void PDA::toDot(std::string file) {
      system(command.c_str());
   }
   }
+void PDA::read(std::string file) {
+  std::ifstream i(file);
+  nlohmann::json j;
+  i >> j;
+  std::vector<std::string> input=j["Alphabet"];
+  std::vector<std::string> stack=j["StackAlphabet"];
+  inputAlphabet=input;
+  stackAlphabet=stack;
+  startStackSymbol=j["StartStack"];
+  for (int k = 0; k < j["States"].size(); ++k) {
+    bool start=false;
+    bool accept=false;
+    if(j["States"][k]==j["StartState"]){
+      start=true;
+    }
+    for (int l = 0; l < j["AcceptStates"].size(); ++l) {
+      if(j["States"][k]==j["AcceptStates"][l]){
+        accept=true;
+        break;
+      }
+    }
+  addState(j["States"][k],accept,start);
+  }
+  for (int m = 0; m < j["Transitions"].size(); ++m) {
+    std::string input=j["Transitions"][m]["input"];
+    std::string stacktop=j["Transitions"][m]["stacktop"];
+    std::vector<std::string> replacement=j["Transitions"][m]["replacement"];
+    if(stacktop==""){
+      stacktop="epsilon";
+    }
+    if(input==""){
+      input="epsilon";
+    }
+    if(replacement.size()==0){
+      replacement.push_back("epsilon");
+    }
+    addTransition(j["Transitions"][m]["from"],input,j["Transitions"][m]["to"],stacktop,replacement);
+  }
+}
+PDA::PDA() {
 
+}
 
 Transition::Transition(const std::string &input, State *state,
                        std::string pop,
